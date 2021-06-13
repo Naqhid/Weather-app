@@ -7,8 +7,26 @@ In this project I built a Weather app with javascript and webpack. with the use 
 - VS Code
 - JavaScript
 
+## Getting Started
+
+To get a local copy up and running follow these simple example steps.
+
+### Setup
 
 ```
+npm install
+```
+
+### Usage
+
+```
+npm run build
+```
+```
+npm start
+```
+
+
 
 ## Author
 
