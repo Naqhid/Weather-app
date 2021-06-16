@@ -1,60 +1,61 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta
-      http-equiv="Content-Security-Policy"
-      content="upgrade-insecure-requests"
-    />
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link rel="stylesheet" href="style.css" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="preconnect" href="https://fonts.gstatic.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Nunito:wght@800&family=Source+Sans+Pro:wght@900&display=swap"
-      rel="stylesheet"
-    />
-    <script
-      src="https://kit.fontawesome.com/a538d6fa29.js"
-      crossorigin="anonymous"
-    ></script>
-    <title>Weather App</title>
-  </head>
-  <body>
-    <div id="main-container">
-      <header>
-        <form>
-          <div class="form-group">
-            <button class="submit-btn">
-              <i class="fas fa-search"></i>
-            </button>
-            <input type="text" placeholder="Search city" />
-            <br />
-            <span class="error-msg">No matching location found!</span>
-          </div>
-        </form>
-      </header>
-      <div class="main-weather-display info">
-        <div class="general-info">
-          <p class="condition">CLOUDY</p>
-          <h1 style="color: brown;" class="location">AMBUR, INDIA</h1>
-          <span class="degrees">30</span>
-        </div>
-        <div class="weather-details info">
-          <p  style="color: black;" class="feels-like">FEELS LIKE: 30</p>
-          <p  style="color: black;" class="wind-mph">WIND: 16 km/h</p>
-          <p  style="color: black;" class="humidity">HUMIDITY: 62%</p>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>Naqhid Weather app</title>
+  <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Domine:wght@500&family=Roboto&display=swap" rel="stylesheet">
+ 
+</head>
+
+<body>
+
+  <div class="search" >
+    <span class="add">🔍</span>
+    <input class="searchBar" type="text" value="Search City...">
+
+  </div>
+  <div class="container">
+    <button class='dark-mode-button top-dark-mode-button' aria-label='dark mode toggle'>
+      <span aria-hidden='true' class='dark-toggle'>
+        <span class='DTspan'></span>
+      </span>
+    </button>
+    <div class="weatherInfo">
+      <div class="cardTop">
+        <span class="weatherCondition"></span>
+        <h1 class="city"></h1>
+      </div>
+      <div class="cardLeft">
+        <span class="temp"></span>
+        <span class="deg">°C</span>
+        <div class="cardRight">
+          <span class="feelsLike"></span>
+          <span class="tempMax"></span>
+          <span class="humidty"></span></span>
         </div>
       </div>
-    </div>
-    <script src="script.js"></script>
-  </body>
-</html>
 
-<!-- Create single day weather. -->
+      <div class="toggle">
+        <label class="switch">
+          <input class="toggleF" type="checkbox">°F
+          <span class="slider"></span>
+        </label>
+
+      </div>
+
+
+    </div>
+    <div class="gify">
+        <img class="weatherImage"src="#" />
+    </div>
+  </div>
+  
+
+  <script src="script.js" charset="utf-8"></script>
+</body>
+
+</html>
