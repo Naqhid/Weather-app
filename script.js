@@ -86,9 +86,7 @@ async function getSticker (search) {
 		const response = await fetch("https://api.giphy.com/v1/stickers/translate?api_key=qitI9CMnXX08n6UFhJJoChiA9ZKbAl53&s=" + search, {mode: "cors"});
 		const sticker = await response.json();
 		img.src = sticker.data.images.fixed_height.url;
-	} catch (error){
-		console.log(error);
-	}
+		}
 }
 
 
@@ -122,14 +120,10 @@ const darkModeToggleFooter = document.querySelector("footer .dark-mode-button");
 
 const enableDarkMode = () => {
 	body.classList.add("dark-mode");
-	localStorage.setItem("darkMode", "enabled");
-	console.log(darkMode);
 };
 
 const disableDarkMode = () => {
 	body.classList.remove("dark-mode");
-	localStorage.setItem("darkMode", null);
-	console.log(darkMode);
 };
 
 if (darkMode == "enabled") {

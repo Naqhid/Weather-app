@@ -5,7 +5,7 @@ const path = require("path");
 
 module.exports = {
 	mode: "development",
-	entry: "./src/index.js",
+	entry: "./index.js",
 	output: {
 		filename: "main.js",
 		path: path.resolve(__dirname, "dist"),
@@ -14,7 +14,7 @@ module.exports = {
 	plugins: [
 		new HtmlWebpackPlugin({
 			title: "Weather app",
-			template: "./src/index.html",
+			template: "./index.html",
 		}),
 		new Dotenv(),
 	],
