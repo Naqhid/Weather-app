@@ -1,109 +1,148 @@
-const form = document.querySelector('form');
-const submitBtn = document.querySelector('.submit-btn');
-const error = document.querySelector('.error-msg');
-form.addEventListener('submit', handleSubmit);
-submitBtn.addEventListener('click', handleSubmit);
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-undef */
+// Dom Elements
 
-function handleSubmit(e) {
-  e.preventDefault();
-  fetchWeather();
+const cityName = document.querySelector(".city");
+const weatherCondition = document.querySelector(".weatherCondition");
+const temp = document.querySelector(".temp");
+const feelsLike = document.querySelector(".feelsLike");
+const max = document.querySelector(".tempMax");
+const humidity = document.querySelector(".humidty");
+const deg = document.querySelector(".deg");
+const input = document.querySelector(".searchBar");
+const submit = document.querySelector(".add");
+const slider = document.querySelector(".toggleF");
+const img = document.querySelector(".weatherImage");
+const body = document.querySelector("body");
+
+async function getWeather(location) {
+	const response = await fetch("https://api.openweathermap.org/data/2.5/weather?q=" + location + "&units=metric&appid=d3038b3303b62168dd448fbeb4531d41", {mode: "cors"});
+	const data = await response.json();
+	const a = data.name;
+	const b = data.main.temp;
+	const c = data.main.feels_like;
+	const d = data.weather[0].description;
+	const e = data.main.humidity;
+	const f = data.main.temp_max;
+	buildPage(a, b, c, d, e, f);
+	getSticker(d);
 }
 
-async function getWeatherData(location) {
-  const response = await fetch(
-    `http://api.weatherapi.com/v1/forecast.json?key=1986480656ec490d950204923202611&q=${location}`,
-    {
-      mode: 'cors',
-    }
-  );
-  if (response.status === 400) {
-    throwErrorMsg();
-  } else {
-    error.style.display = 'none';
-    const weatherData = await response.json();
-    const newData = processData(weatherData);
-    displayData(newData);
-    reset();
-  }
+getWeather("Ambur");
+
+async function toggleFarenheight() {
+	let location = cityName.textContent;
+	let unit = checkState();
+	const response = await fetch("https://api.openweathermap.org/data/2.5/weather?q=" + location + "&units="+ unit + "&appid=d3038b3303b62168dd448fbeb4531d41", {mode: "cors"});
+	const data = await response.json();
+	const a = data.name;
+	const b = data.main.temp;
+	const c = data.main.feels_like;
+	const d = data.weather[0].description;
+	const e = data.main.humidity;
+	const f = data.main.temp_max;
+	getSticker(d);
+	buildPage(a, b, c, d, e, f);
+	changeDef();
 }
 
-function throwErrorMsg() {
-  error.style.display = 'block';
-  if (error.classList.contains('fade-in')) {
-    error.style.display = 'none';
-    error.classList.remove('fade-in2');
-    error.offsetWidth;
-    error.classList.add('fade-in');
-    error.style.display = 'block';
-  } else {
-    error.classList.add('fade-in');
-  }
-}
+// Build page with API data
 
-function processData(weatherData) {
-  // grab all the data i want to display on the page
-  const myData = {
-    condition: weatherData.current.condition.text,
-    feelsLike: {
-      f: Math.round(weatherData.current.feelslike_f),
-      c: Math.round(weatherData.current.feelslike_c),
-    },
-    currentTemp: {
-      f: Math.round(weatherData.current.temp_f),
-      c: Math.round(weatherData.current.temp_c),
-    },
-    wind: Math.round(weatherData.current.wind_mph),
-    humidity: weatherData.current.humidity,
-    location: weatherData.location.name.toUpperCase(),
-  };
+const buildPage = (place, t, feels, desc, humid, m) => {
+	desc = desc.charAt(0).toUpperCase() + desc.slice(1);
+	cityName.textContent = place;
+	weatherCondition.textContent = desc;
+	temp.textContent = Math.round(t);
+	feelsLike.textContent = "Feels like: " + Math.round(feels) + "°";
+	max.textContent = "Today's high: " + Math.round(m) + "°";
+	humidity.textContent = "Humidty: " + humid + "%";
+};
 
-  // if in the US, add state
-  // if not, add country
-  if (weatherData.location.country === 'United States of America') {
-    myData['region'] = weatherData.location.region.toUpperCase();
-  } else {
-    myData['region'] = weatherData.location.country.toUpperCase();
-  }
 
-  return myData;
-}
+// Check Slider for temperature units
+const checkState = () => {
+	if (slider.checked === true){
+		x = "imperial";
+		return x;
+	} else if (slider.checked === false) {
+		x = "metric";
+		return x;
+	}
+};
 
-function displayData(newData) {
-  const weatherInfo = document.getElementsByClassName('info');
-  Array.from(weatherInfo).forEach((div) => {
-    if (div.classList.contains('fade-in2')) {
-      div.classList.remove('fade-in2');
-      div.offsetWidth;
-      div.classList.add('fade-in2');
-    } else {
-      div.classList.add('fade-in2');
-    }
-  });
-  document.querySelector('.condition').textContent = newData.condition;
-  document.querySelector(
-    '.location'
-  ).textContent = `${newData.location}, ${newData.region}`;
-  document.querySelector('.degrees').textContent = newData.currentTemp.f;
-  document.querySelector(
-    '.feels-like'
-  ).textContent = `FEELS LIKE: ${newData.feelsLike.f}`;
-  document.querySelector('.wind-mph').textContent = `WIND: ${newData.wind} MPH`;
-  document.querySelector(
-    '.humidity'
-  ).textContent = `HUMIDITY: ${newData.humidity}`;
-}
+// Toggle Degree
+const changeDef = () => {
+	if(slider.checked === true){
+		deg.textContent = "°F";
+	} else if (slider.checked === false){
+		deg.textContent = "°C";
+	}
+};
 
-function reset() {
-  form.reset();
-}
 
-// get location from user
-function fetchWeather() {
-  const input = document.querySelector('input[type="text"]');
-  const userLocation = input.value;
-  getWeatherData(userLocation);
+
+async function getSticker (search) {
+	try {
+		const response = await fetch("https://api.giphy.com/v1/stickers/translate?api_key=qitI9CMnXX08n6UFhJJoChiA9ZKbAl53&s=" + search, {mode: "cors"});
+		const sticker = await response.json();
+		img.src = sticker.data.images.fixed_height.url;
+	} catch (error){
+		console.log(error);
+	}
 }
 
 
+// Event Listeners
 
+submit.addEventListener("click", () => {
+	getWeather(input.value);
+});
 
+input.addEventListener("keyup", (e) => {
+	if (e.keyCode === 13) {
+		e.preventDefault();
+		submit.click();
+	}
+});
+
+input.addEventListener("click", () => {
+	input.value = "";
+});
+
+slider.addEventListener("click", () => {
+	toggleFarenheight();
+
+});
+
+// Add Darkmode
+
+let darkMode = localStorage.getItem("darkMode");
+const darkModeToggle = document.querySelector(".dark-mode-button");
+const darkModeToggleFooter = document.querySelector("footer .dark-mode-button");
+
+const enableDarkMode = () => {
+	body.classList.add("dark-mode");
+	localStorage.setItem("darkMode", "enabled");
+	console.log(darkMode);
+};
+
+const disableDarkMode = () => {
+	body.classList.remove("dark-mode");
+	localStorage.setItem("darkMode", null);
+	console.log(darkMode);
+};
+
+if (darkMode == "enabled") {
+	enableDarkMode();
+} else {
+	disableDarkMode();
+}
+
+darkModeToggle.addEventListener("click", () => {
+	darkMode = localStorage.getItem("darkMode");
+	if (darkMode !== "enabled") {
+		enableDarkMode();
+	} else {
+		disableDarkMode();
+	}
+});
