@@ -2,13 +2,13 @@ body {
   margin: 0;
   color: white;
   background-image: url('weather.png');
-} 
- 
+}
+
 h1 {
   margin: 1% 0;
   font-size: 4em;
   font-family: 'Domine', serif;
-  color: Brown;
+  color: brown;
 }
 
 span {
@@ -30,13 +30,13 @@ span {
   top: 50px;
 }
 
-.search>span {
+.search > span {
   font-size: 1em;
   align-self: center;
   margin-right: 2%;
 }
 
-.search>input {
+.search > input {
   background-color: rgba(255, 255, 255, 0.6);
   border: 1px solid white;
 }
@@ -69,9 +69,6 @@ span {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
-  /* position: absolute;
-  left: 28%;
-  top: 38%; */
   height: 65%;
   margin-top: 4%;
   width: 80%;
@@ -136,11 +133,11 @@ span {
   right: 0;
   bottom: 0;
   background-color: #ccc;
-  -webkit-transition: .4s;
-  transition: .4s;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
 }
 
-.slider:before {
+.slider::before {
   position: absolute;
   content: "";
   height: 26px;
@@ -148,19 +145,19 @@ span {
   left: 4px;
   bottom: 4px;
   background-color: white;
-  -webkit-transition: .4s;
-  transition: .4s;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
 }
 
-input:checked+.slider {
+input:checked + .slider {
   background-color: #6fccff;
 }
 
-input:focus+.slider {
+input:focus + .slider {
   box-shadow: 0 0 1px #6fccff;
 }
 
-input:checked+.slider:before {
+input:checked + .slider::before {
   -webkit-transform: translateX(26px);
   -ms-transform: translateX(26px);
   transform: translateX(26px);
@@ -171,6 +168,7 @@ input:checked+.slider:before {
   h1 {
     font-size: 3em;
   }
+
   .search {
     display: flex;
     flex-direction: row;
@@ -184,7 +182,7 @@ input:checked+.slider:before {
     margin: 5% auto;
   }
 
-  .search>span {
+  .search > span {
     font-size: 0.9em;
     align-self: center;
     margin-right: 2%;
@@ -219,13 +217,12 @@ input:checked+.slider:before {
   }
 
   .gify {
-  position: static;
-  margin-top: 50%;
+    position: static;
+    margin-top: 50%;
   }
 
   .temp {
     font-size: 6em;
     text-align: left;
   }
-
 }
