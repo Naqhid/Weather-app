@@ -3,12 +3,12 @@ body {
   color: white;
   background-image: url('weather.png');
 } 
- 
+
 h1 {
   margin: 1% 0;
   font-size: 4em;
   font-family: 'Domine', serif;
-  color: Brown;
+  color: brown;
 }
 
 span {
@@ -30,13 +30,13 @@ span {
   top: 50px;
 }
 
-.search>span {
+.search > span {
   font-size: 1em;
   align-self: center;
   margin-right: 2%;
 }
 
-.search>input {
+.search > input {
   background-color: rgba(255, 255, 255, 0.6);
   border: 1px solid white;
 }
